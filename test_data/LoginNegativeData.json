@@ -1,0 +1,13 @@
+
+[
+    {
+        "email" : "abdelrahmanosama76@gmail.com",
+        "password" : "a123456789",
+        "expected" : "Email is incorrect"    
+    },
+    {
+        "email" : "abdelrahmanosama769@gmail.com",
+        "password" : "a12345678",
+        "expected" : "Password is incorrect"
+    }
+]
