@@ -1,12 +1,10 @@
 import {test,type Page} from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { HomePage } from '../pages/HomePage';
+import { PageObjectManager } from '../pages/PageObjectManager';
 import loginNegativeData from'../../test_data/LoginNegativeData.json'
 import loginHappyData from'../../test_data/LoginHappyData.json'
 import LoginNegativeData from '../../test_data/LoginNegativeData.json';
 
-let loginPage : LoginPage;
-let homePage : HomePage;
+let pageObjectManager : PageObjectManager;
 
 let loginNegative = JSON.parse(JSON.stringify(LoginNegativeData));
 let loginHappy = JSON.parse(JSON.stringify(loginHappyData));
@@ -18,31 +16,30 @@ test.beforeAll("Before All tests",()=>{
 });
 
 test.beforeEach("Before each test",async ({page},testInfo)=>{
-    homePage = new HomePage(page);
-    loginPage = new LoginPage(page);
+    pageObjectManager = new PageObjectManager(page);
 
-    await homePage.openWebsite();
+    await pageObjectManager.getHomePage().openWebsite();
     console.log(`Running before test case with tilte ${testInfo.title}`);
 });
 
 test("Login with valid credential",async ({page})=>{
-    await homePage.openLoginPage();
-    await loginPage.assertLoginMessage();
+    await pageObjectManager.getHomePage().openLoginPage();
+    await pageObjectManager.getLoginPage().assertLoginMessage();
 
-    await loginPage.userCanLogin(loginHappy.email, loginHappy.password);
-    await loginPage.assertLogoutBtnisVisible();
+    await pageObjectManager.getLoginPage().userCanLogin(loginHappy.email, loginHappy.password);
+    await pageObjectManager.getLoginPage().assertLogoutBtnisVisible();
 
-    await loginPage.userCanLogout();
-    await loginPage.assertLoginMessage(); 
+    await pageObjectManager.getLoginPage().userCanLogout();
+    await pageObjectManager.getLoginPage().assertLoginMessage(); 
 });
 
 loginNegativeData.forEach(({ email, password, expected })=>{
     test(`Login with invalid credential for ${expected}`,async ({page})=>{
-        await homePage.openLoginPage();
-        await loginPage.assertLoginMessage();
+        await pageObjectManager.getHomePage().openLoginPage();
+        await pageObjectManager.getLoginPage().assertLoginMessage();
 
-        await loginPage.userCanLogin(email, password);
-        await loginPage.assertFailedMessage();
+        await pageObjectManager.getLoginPage().userCanLogin(email, password);
+        await pageObjectManager.getLoginPage().assertFailedMessage();
     });
 })
 
