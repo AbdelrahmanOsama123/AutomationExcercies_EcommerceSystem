@@ -11,6 +11,7 @@
 - place page under pages folder and tests under spces folder
 - Run test cases to ensure they are working and generating the report successfully
 - Use playwright mcp to generator test cases and implement them in the provided stucture
+- commit and push any changes in the source control for github repository
 
 ### Constrains
 - Follow guidlines provided in the README.md file
