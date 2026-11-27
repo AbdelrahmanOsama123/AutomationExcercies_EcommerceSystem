@@ -2,11 +2,13 @@ import {expect,type Locator,type Page} from '@playwright/test';
 
 export class HomePage{
     private readonly loginBtn : Locator;
+    private readonly contactUsBtn : Locator;
     private readonly page : Page;
 
     constructor(page:Page){
         this.page = page;
         this.loginBtn = page.getByRole("link",{name:"Signup / Login"});
+        this.contactUsBtn = page.getByRole("link",{name:"Contact us"});
     }
 
     public async openWebsite(){
@@ -19,5 +21,9 @@ export class HomePage{
 
     public async openRegisterPage(){
         await this.loginBtn.click();
+    }
+
+    public async openContactUsPage(){
+        await this.contactUsBtn.click();
     }
 }

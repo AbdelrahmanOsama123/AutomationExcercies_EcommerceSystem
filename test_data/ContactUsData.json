@@ -1,0 +1,16 @@
+{
+  "valid": {
+    "name": "Contact Test User",
+    "email": "contact.test@example.com",
+    "subject": "Complain",
+    "message": "My order doesn't deliver yet",
+    "filePath": "images/Mohamed Salah.png"
+  },
+  "empty": {
+    "name": "",
+    "email": "",
+    "subject": "",
+    "message": "",
+    "filePath": ""
+  }
+}
